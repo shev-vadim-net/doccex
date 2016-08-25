@@ -10,7 +10,6 @@ xml.w :p do
       else
         xml.w :cols, "w:space" => "708"
       end
-      xml.w :printerSettings, "r:id" => rId
     end
   end
 end

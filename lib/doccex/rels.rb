@@ -21,7 +21,6 @@ class Doccex::Rels
 
 
   OTHER_RELATIONSHIPS = { :footer => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer", :target => "footer1.xml"},
-                          :printer => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/printerSettings", :target => "printerSettings/printerSettingsINDEX.bin"},
                           :image => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"} }
 
   def initialize
@@ -39,7 +38,7 @@ class Doccex::Rels
     elsif type == :printer
       target = new_rel[:target].dup.gsub!(/INDEX/,@printer_index.to_s)
       @relationships << {:id => new_id, :type => new_rel[:type], :target => target}
-      copy_printerSettings
+      # copy_printerSettings
       @printer_index += 1
     elsif type == :image
       @image_index += 1

@@ -6,7 +6,6 @@
   <Default Extension="jpg" ContentType="image/jpeg"/>
   <Default Extension="png" ContentType="image/png"/>
   <Default Extension="xml" ContentType="application/xml"/>
-  <Default Extension="bin" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.printerSettings"/>
   <Override PartName="/word/webSettings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.webSettings+xml"/>
   <Override PartName="/word/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/>
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
