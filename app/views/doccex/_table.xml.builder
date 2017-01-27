@@ -6,7 +6,7 @@ xml.w :tbl do
   end
   xml.w :tblGrid do
     cols.each do |col|
-      xml.w :gridcol, "w:w" => col[:twips].to_s
+      xml.w :gridCol, "w:w" => col[:twips].to_s
     end
   end
 
