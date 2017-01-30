@@ -45,5 +45,9 @@ module Doccex
     def header_cell(string, col)
       Doccex::PageElements::HeaderCell.new(self, string, col)
     end
+
+    def footer(xml)
+      Doccex::PageElements::Footer.new(self, xml)
+    end
   end
 end
