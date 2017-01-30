@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", ">= 3.2.5"
   s.add_dependency "haml"
+  s.add_dependency "rmagick", ">= 2.3.12"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "capybara"

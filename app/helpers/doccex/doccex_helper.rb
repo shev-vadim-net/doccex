@@ -34,8 +34,8 @@ module Doccex
       Doccex::PageElements::Table.new(self, options)
     end
 
-    def image(image_file)
-      Doccex::PageElements::Image.new(self, image_file)
+    def image(image_file, properties = {})
+      Doccex::PageElements::Image.new(self, image_file, properties)
     end
 
     def cell(col, obj_name, obj)
