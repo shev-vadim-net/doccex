@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Doccex::VERSION
   s.authors     = ["Les Nightingill"]
   s.email       = ["tbd@tbd.org"]
-  s.homepage    = "There isn't one"
+  s.homepage    = "https://github.com/shev-vadim-net/doccex.git"
   s.summary     = "Lightweight Rails engine to emit MSWord documents"
   s.description = "Mounts as an engine in a Rails application"
 
