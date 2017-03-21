@@ -1,5 +1,6 @@
 class Doccex::Document < Doccex::Base
-  def initialize(view_assigns)
+  def initialize(view_assigns, path_prefix = nil)
+    @path_prefix = path_prefix
     view_assigns.keys.each do |key|
       instance_variable_set("@"+key, view_assigns[key])
     end
@@ -7,17 +8,20 @@ class Doccex::Document < Doccex::Base
   end
 
   def contents(string)
-    File.open(Rails.application.root.join('tmp/docx/word/document.xml'), 'w') {|file| file.write(string)}
+    File.open(Rails.application.root.join("#{path_to_tmp}/docx/word/document.xml"), 'w') {|file| file.write(string)}
   end
 
   def render_to_string
-    source = Rails.application.root.join('tmp/docx')
+    source = Rails.application.root.join("#{path_to_tmp}/docx")
     zip_package(source)
     read_zipfile
   end
 
   def create_template
-    FileUtils.cp_r(File.expand_path('../templates/docx',__FILE__), Rails.application.root.join('tmp'))
+    # create dir, because without existing dir it doesn't copy into docx subfolder
+    FileUtils.mkdir_p(Rails.application.root.join(path_to_tmp)) unless @path_prefix.nil?
+    FileUtils.cp_r(File.expand_path('../templates/docx',__FILE__), Rails.application.root.join(path_to_tmp))
+    FileUtils.mkdir_p(Rails.application.root.join("#{path_to_tmp}/docx/word/media"))
   end
 
 end

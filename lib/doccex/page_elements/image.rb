@@ -4,9 +4,10 @@ class Doccex::PageElements::Image < String
 
   # the image_file argument is the name of the image file. It must have been copied into
   # the tmp/docx/word/media directory before being passed in (opportunity for improvement here?)
-  def initialize(context, image_file, properties)
-    rels = context.instance_variable_get(:@rels)
-    locals = {:rid => rels.next_id(:image, image_file), :index => rels.next_image_index }
+  def initialize(context, orig_image_file, properties)
+    @rels = context.instance_variable_get(:@rels)
+    image_file = copy_image(orig_image_file, properties[:filename])
+    locals = {:rid => @rels.next_id(:image, image_file), :index => @rels.next_image_index }
     locals[:dimensions] = get_converted_dimensions(image_file, properties)
     locals[:align] = (properties[:align] or 'left')
     super context.render(:partial => 'doccex/image', :formats => [:xml], :locals => locals)
@@ -68,5 +69,11 @@ class Doccex::PageElements::Image < String
     else
       [nil, nil]
     end
+  end
+
+  def copy_image(orig_image_file, result_filename)
+    docx_file_path = Rails.root.join("#{@rels.path_to_tmp}/docx/word/media/#{result_filename}")
+    FileUtils.cp(orig_image_file, docx_file_path)
+    docx_file_path
   end
 end

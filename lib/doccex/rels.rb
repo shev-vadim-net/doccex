@@ -23,7 +23,10 @@ class Doccex::Rels
   OTHER_RELATIONSHIPS = { :footer => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer", :target => "footer1.xml"},
                           :image => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"} }
 
-  def initialize
+  attr_accessor :path_prefix
+
+  def initialize(path_prefix = nil)
+    @path_prefix = path_prefix
     @relationships = BASIC_RELATIONSHIPS.dup
     @printer_index = 1
     @image_index = 0
@@ -53,7 +56,7 @@ class Doccex::Rels
   end
 
   def copy_printerSettings
-    system "cp #{Rails.application.root.join('tmp/docx/word/printerSettings/printerSettings1.bin')} #{Rails.application.root.join("tmp/docx/word/printerSettings/printerSettings#{@printer_index.to_s}.bin")}"
+    system "cp #{Rails.application.root.join("#{path_to_tmp}/docx/word/printerSettings/printerSettings1.bin")} #{Rails.application.root.join("#{path_to_tmp}/docx/word/printerSettings/printerSettings#{@printer_index.to_s}.bin")}"
   end
 
   def render_to_string
@@ -67,6 +70,10 @@ class Doccex::Rels
   end
 
   def create_file
-    File.open(Rails.application.root.join('tmp/docx/word/_rels/document.xml.rels'),'w'){|f| f.write(render_to_string)}
+    File.open(Rails.application.root.join("#{path_to_tmp}/docx/word/_rels/document.xml.rels"),'w'){|f| f.write(render_to_string)}
+  end
+
+  def path_to_tmp
+    path_prefix.nil? ? 'tmp' : "tmp/#{path_prefix}"
   end
 end
