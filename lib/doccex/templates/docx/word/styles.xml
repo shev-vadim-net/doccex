@@ -16,7 +16,7 @@
     <w:name w:val="Normal"/>
     <w:qFormat/>
     <w:rPr>
-      <w:rFonts w:ascii="Arial" w:hAnsi="Arial"/>
+      <w:rFonts w:ascii="Oxygen" w:hAnsi="Oxygen"/>
     </w:rPr>
   </w:style>
   <w:style w:type="paragraph" w:styleId="Heading1">

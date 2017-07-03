@@ -17,7 +17,13 @@ class Doccex::Rels
                             :target => "fontTable.xml"},
                           { :id => "rId5",
                             :type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme",
-                            :target => "theme/theme1.xml"} ]
+                            :target => "theme/theme1.xml"},
+                          { :id => "rId6",
+                            :type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/font",
+                            :target => "fonts/Oxygen-Regular.ttf"},
+                          { :id => "rId7",
+                            :type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/font",
+                            :target => "fonts/Oxygen-Bold.ttf"} ]
 
 
   OTHER_RELATIONSHIPS = { :footer => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer", :target => "footer1.xml"},
