@@ -1,7 +1,7 @@
 require 'builder'
 
 class Doccex::Rels
-  attr_accessor :relationships, :footerReference
+  attr_accessor :relationships, :footerReference, :headerReference
 
   BASIC_RELATIONSHIPS = [ { :id => "rId1",
                             :type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles",
@@ -27,6 +27,7 @@ class Doccex::Rels
 
 
   OTHER_RELATIONSHIPS = { :footer => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer", :target => "footer1.xml"},
+                          :header => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/header", :target => "header1.xml"},
                           :image => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"} }
 
   attr_accessor :path_prefix
@@ -44,6 +45,9 @@ class Doccex::Rels
     if type == :footer
       @relationships << {:id => new_id, :type => new_rel[:type], :target => new_rel[:target]}
       @footerReference = new_id
+    elsif type == :header
+      @relationships << {:id => new_id, :type => new_rel[:type], :target => new_rel[:target]}
+      @headerReference = new_id
     elsif type == :printer
       target = new_rel[:target].dup.gsub!(/INDEX/,@printer_index.to_s)
       @relationships << {:id => new_id, :type => new_rel[:type], :target => target}

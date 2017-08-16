@@ -49,5 +49,9 @@ module Doccex
     def footer(xml)
       Doccex::PageElements::Footer.new(self, xml)
     end
+
+    def header(xml)
+      Doccex::PageElements::Header.new(self, xml)
+    end
   end
 end
