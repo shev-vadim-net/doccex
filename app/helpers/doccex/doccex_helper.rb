@@ -53,5 +53,9 @@ module Doccex
     def header(xml)
       Doccex::PageElements::Header.new(self, xml)
     end
+
+    def html_content(html)
+      Doccex::PageElements::AltChunk.new(self, html)
+    end
   end
 end

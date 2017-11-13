@@ -28,6 +28,7 @@ class Doccex::Rels
 
   OTHER_RELATIONSHIPS = { :footer => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer", :target => "footer1.xml"},
                           :header => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/header", :target => "header1.xml"},
+                          :alt_chunk => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/afChunk"},
                           :image => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"} }
 
   attr_accessor :path_prefix
@@ -37,6 +38,7 @@ class Doccex::Rels
     @relationships = BASIC_RELATIONSHIPS.dup
     @printer_index = 1
     @image_index = 0
+    @alt_chunk_index = 0
   end
 
   def next_id(type, *args)
@@ -56,6 +58,10 @@ class Doccex::Rels
     elsif type == :image
       @image_index += 1
       target = Rails.root.join(args[0]).to_s.match(/media.*/)[0]
+      @relationships << {:id => new_id, :type => new_rel[:type], :target => target}
+    elsif type == :alt_chunk
+      @alt_chunk_index += 1
+      target = "html_#{new_id}.html"
       @relationships << {:id => new_id, :type => new_rel[:type], :target => target}
     end
     new_id
