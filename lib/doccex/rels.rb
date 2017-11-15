@@ -28,7 +28,7 @@ class Doccex::Rels
 
   OTHER_RELATIONSHIPS = { :footer => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer", :target => "footer1.xml"},
                           :header => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/header", :target => "header1.xml"},
-                          :alt_chunk => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/afChunk"},
+                          :alt_chunk => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/aFChunk"},
                           :image => {:type => "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"} }
 
   attr_accessor :path_prefix
@@ -61,7 +61,7 @@ class Doccex::Rels
       @relationships << {:id => new_id, :type => new_rel[:type], :target => target}
     elsif type == :alt_chunk
       @alt_chunk_index += 1
-      target = "html_#{new_id}.html"
+      target = "/word/html_#{new_id}.html"
       @relationships << {:id => new_id, :type => new_rel[:type], :target => target}
     end
     new_id
