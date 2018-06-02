@@ -11,8 +11,11 @@ class Doccex::Base
   end
 
   def zip_package(dir)
+    $stderr.puts "cd #{dir}"
     FileUtils.cd(dir) do
-      system "zip -qr #{tmp_file} . -x \*.DS_Store \*.git/\* \*.gitignore \*.gitkeep"
+      $stderr.puts "zip -qr #{tmp_file} . -x \*.DS_Store \*.git/\* \*.gitignore \*.gitkeep"
+      result = system "zip -qr #{tmp_file} . -x \*.DS_Store \*.git/\* \*.gitignore \*.gitkeep"
+      $stderr.puts "Error while zipping docx: #{$?}" unless result
     end
     cleanup(dir)
   end
@@ -26,7 +29,7 @@ class Doccex::Base
 
   def cleanup(*files)
     files.each do |f|
-      FileUtils.send(File.directory?(File.new(f)) ? "rm_r" : "rm",f)
+      FileUtils.send(File.directory?(File.new(f)) ? "rm_r" : "rm", f, verbose: true)
     end
   end
 end

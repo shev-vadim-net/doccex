@@ -19,9 +19,10 @@ class Doccex::Document < Doccex::Base
 
   def create_template
     # create dir, because without existing dir it doesn't copy into docx subfolder
-    FileUtils.mkdir_p(Rails.application.root.join(path_to_tmp)) unless @path_prefix.nil?
-    FileUtils.cp_r(File.expand_path('../templates/docx',__FILE__), Rails.application.root.join(path_to_tmp))
-    FileUtils.mkdir_p(Rails.application.root.join("#{path_to_tmp}/docx/word/media"))
+    FileUtils.mkdir_p(Rails.application.root.join(path_to_tmp), verbose: true) unless @path_prefix.nil?
+    FileUtils.cp_r(File.expand_path('../templates/docx',__FILE__), Rails.application.root.join(path_to_tmp), verbose: true)
+    FileUtils.mkdir_p(Rails.application.root.join("#{path_to_tmp}/docx/word/media"), verbose: true)
+    system "ls -alR #{path_to_tmp}/docx"
   end
 
 end
